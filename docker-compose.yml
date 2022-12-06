@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+
+    api:
+        build: .
+        container_name: derfentor-local-api
+        volumes:
+            - ./:/app
+        ports:
+            - "2715:80"
+
+
+    pgsql:
+        image: postgres:12.4
+        container_name: derfentor-local-pgsql
+        volumes:
+            - derfentor-local-db:/var/lib/postgresql/data
+        environment:
+            TZ: "Europe/Kiev"
+            PGTZ: "Europe/Kiev"
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        ports:
+          - "5415:5432"
+
+    redis:
+        container_name: derfentor-local-redis
+        image: redis:5.0
+        volumes:
+            - derfentor-local-redis:/data
+
+
+networks:
+    default:
+        name: derfentor-local
+        driver: bridge
+
+volumes:
+    derfentor-local-db:
+        driver: local
+    derfentor-local-redis:
+        driver: local
