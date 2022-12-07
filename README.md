@@ -18,3 +18,6 @@ Wait until build.
   
 ## to open php container
 run `docker exec -it derfentor-local-api bash`
+
+## to generate documentation
+run `php artisan l5-swagger:generate` in php container. Documentation will be available by uri `/api/documentation`
