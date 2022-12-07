@@ -22,7 +22,7 @@ class RecordClearJob implements ShouldQueue
         foreach ($records as $record){
             $file = $record->file;
             if ($file) {
-                Storage::disk('private_files')->delete($file->path);
+                Storage::disk('private_files')->delete($file->name);
                 $file->delete();
             }
             $record->delete();

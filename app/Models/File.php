@@ -16,7 +16,7 @@ class File extends Model
     ];
 
     protected $fillable = [
-        'path',
+        'name',
         'record_id',
     ];
 

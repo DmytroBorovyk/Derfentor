@@ -16,12 +16,10 @@ use OpenApi\Annotations as OA;
 class RecordController extends Controller
 {
     private RecordService $recordService;
-    private RedisService $redisService;
 
     public function __construct(RecordService $service, RedisService $redisService)
     {
         $this->recordService = $service;
-        $this->redisService = $redisService;
     }
 
     /**
@@ -72,7 +70,7 @@ class RecordController extends Controller
      */
     public function show(Record $record): RecordResource
     {
-        return $this->recordService->show($record, $this->redisService);
+        return $this->recordService->show($record);
     }
 
     /**
@@ -108,6 +106,6 @@ class RecordController extends Controller
 
     public function getImg(string $slug)
     {
-        return $this->recordService->getImg($this->redisService, $slug);
+        return $this->recordService->getImg($slug);
     }
 }
